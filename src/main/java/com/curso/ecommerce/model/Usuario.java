@@ -1,9 +1,12 @@
 package com.curso.ecommerce.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,27 @@ public class Usuario {
     private String telefono;
     private String tipo;
     private String password;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Producto> productos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Orden> ordenes;
+
+    public Usuario() {
+    }
+
+    public Usuario(Integer id, String nombre, String username, String email, String direccion, String telefono,
+            String tipo, String password) {
+        this.id = id;
+        this.nombre = nombre;
+        this.username = username;
+        this.email = email;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.tipo = tipo;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
@@ -85,19 +109,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public Usuario(Integer id, String nombre, String username, String email, String direccion, String telefono,
-            String tipo, String password) {
-        this.id = id;
-        this.nombre = nombre;
-        this.username = username;
-        this.email = email;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.tipo = tipo;
-        this.password = password;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public Usuario() {
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 
     @Override
